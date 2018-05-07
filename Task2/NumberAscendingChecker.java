@@ -2,7 +2,7 @@
 public class NumberAscendingChecker {
 	private final static int DIGIT = 10;
 
-	public static boolean isAscending(int number) {
+	public boolean isAscending(int number) {
 		int firstDigit = number % DIGIT;
 		number /= DIGIT;
 		int secondDigit = number % DIGIT;
