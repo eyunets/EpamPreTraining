@@ -44,10 +44,6 @@ public class Algorithms {
 		return number1 * number2 / findGCD(number1, number2);
 	}
 
-	public int less(int a, int b) {
-		return a > b ? b : a;
-	}
-
 	public int numDifrentElem(int number) {
 		int tempNumber;
 		int tempValue;
