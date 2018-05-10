@@ -1,19 +1,18 @@
 import java.util.Random;
 
 public class HeadsOrTails {
-	private final int HEAD = 0;
-	private final int TAIL = 1;
-	private final int POSSIBILITY_COUNT = 2;
+	private final static boolean HEAD = true;
+	private final static boolean TAIL = false;
 
-	public void throwCoin(int count) {
+	public static void throwCoin(int count) {
 		int tail = 0;
 		int head = 0;
-		int rand;
+		boolean rand;
 		Random random = new Random();
 
 		for (int i = 0; i < count; i++) {
 
-			rand = random.nextInt(POSSIBILITY_COUNT);
+			rand = random.nextBoolean();
 
 			if (rand == HEAD) {
 				head++;
@@ -24,3 +23,4 @@ public class HeadsOrTails {
 		System.out.println("Tails - " + tail + " Heads - " + head);
 	}
 }
+
