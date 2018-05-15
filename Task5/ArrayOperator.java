@@ -11,15 +11,13 @@ public class ArrayOperator {
 	}
 
 	public static double findMax(double array[]) {
-		{
-			double maxElement = array[0];
-			for (int i = 1; i < array.length - 1; i++) {
-				if (array[i] > maxElement) {
-					maxElement = array[i];
-				}
+		double maxElement = array[0];
+		for (int i = 0; i < array.length - 1; i++) {
+			if (array[i] > maxElement) {
+				maxElement = array[i];
 			}
-			return maxElement;
 		}
+		return maxElement;
 	}
 
 	public static double findArithmeticMean(double array[]) {
