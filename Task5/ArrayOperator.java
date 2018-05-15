@@ -2,7 +2,7 @@ public class ArrayOperator {
 
 	public static double findMin(double array[]) {
 		double minElement = array[0];
-		for (int i = 0; i < array.length - 1; i++) {
+		for (int i = 1; i < array.length - 1; i++) {
 			if (array[i] < minElement) {
 				minElement = array[i];
 			}
@@ -13,7 +13,7 @@ public class ArrayOperator {
 	public static double findMax(double array[]) {
 		{
 			double maxElement = array[0];
-			for (int i = 0; i < array.length - 1; i++) {
+			for (int i = 1; i < array.length - 1; i++) {
 				if (array[i] > maxElement) {
 					maxElement = array[i];
 				}
@@ -31,7 +31,7 @@ public class ArrayOperator {
 	}
 
 	public static double findGeometricMean(double array[]) {
-		double multiply = 0;
+		double multiply = 1;
 		for (int i = 0; i < array.length; i++) {
 			multiply = multiply * array[i];
 		}
