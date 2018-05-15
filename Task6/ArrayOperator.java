@@ -46,8 +46,118 @@ public class ArrayOperator {
 		return Math.pow(multiply, 1.0 / size);
 	}
 
-	public static double findFirstLocalMin(double[][] array) {
-		return -1;
+	public static int[] findFirstLocalMin(double[][] array) {
+
+		int[] index = new int[] { -1, -1 };
+
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+				if (i == 0) {
+					if (j == 0) {
+						if ((array[i][j] < array[i][j + 1]) && (array[i][j] < array[i + 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if (j == (array[i].length - 1)) {
+						if ((array[i][j] < array[i][j - 1]) && (array[i][j] < array[i + 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if ((array[i][j] < array[i][j + 1]) && (array[i][j] < array[i][j - 1])
+							&& (array[i][j] < array[i + 1][j])) {
+						index[0] = i;
+						index[1] = j;
+						return index;
+					}
+				} else if (i == (array.length - 1)) {
+					if (j == 0) {
+						if ((array[i][j] < array[i][j + 1]) && (array[i][j] < array[i - 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if (j == (array[i].length - 1)) {
+						if ((array[i][j] < array[i][j - 1]) && (array[i][j] < array[i - 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if ((array[i][j] < array[i][j + 1]) && (array[i][j] < array[i][j - 1])
+							&& (array[i][j] < array[i - 1][j])) {
+						index[0] = i;
+						index[1] = j;
+						return index;
+					}
+
+				} else if ((array[i][j] < array[i][j + 1]) && (array[i][j] < array[i][j - 1])
+						&& (array[i][j] < array[i + 1][j]) && (array[i][j] < array[i - 1][j])) {
+					index[0] = i;
+					index[1] = j;
+					return index;
+				}
+			}
+		}
+		return index;
+	}
+
+	public static int[] findFirstLocalMax(double[][] array) {
+
+		int[] index = { -1, -1 };
+
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+				if (i == 0) {
+					if (j == 0) {
+						if ((array[i][j] > array[i][j + 1]) && (array[i][j] > array[i + 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if (j == (array[i].length - 1)) {
+						if ((array[i][j] > array[i][j - 1]) && (array[i][j] > array[i + 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if ((array[i][j] > array[i][j + 1]) && (array[i][j] > array[i][j - 1])
+							&& (array[i][j] > array[i + 1][j])) {
+						index[0] = i;
+						index[1] = j;
+						return index;
+
+					}
+				} else if (i == (array.length - 1)) {
+					if (j == 0) {
+						if ((array[i][j] > array[i][j + 1]) && (array[i][j] > array[i - 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if (j == (array[i].length - 1)) {
+						if ((array[i][j] > array[i][j - 1]) && (array[i][j] > array[i - 1][j])) {
+							index[0] = i;
+							index[1] = j;
+							return index;
+						}
+					} else if ((array[i][j] > array[i][j + 1]) && (array[i][j] > array[i][j - 1])
+							&& (array[i][j] > array[i - 1][j])) {
+						index[0] = i;
+						index[1] = j;
+						return index;
+					}
+
+				} else if ((array[i][j] > array[i][j + 1]) && (array[i][j] > array[i][j - 1])
+						&& (array[i][j] > array[i + 1][j]) && (array[i][j] > array[i - 1][j])) {
+					index[0] = i;
+					index[1] = j;
+					return index;
+				}
+			}
+		}
+
+		return index;
 	}
 
 	public static double[][] transposeMatrix(double[][] array) {
@@ -61,50 +171,6 @@ public class ArrayOperator {
 				}
 		}
 		return array;
-	}
-
-	private static boolean isLocalMin(double[][] array, int x, int y) {
-		if (x != 0 && y != 0 && x != array.length - 1 && y != array[0].length - 1) {
-			return array[x][y] < array[x - 1][y] && array[x][y] < array[x + 1][y] && array[x][y] < array[x][y - 1]
-					&& array[x][y] < array[x][y + 1];
-		}
-		return false;
-	}
-
-	private static boolean isLocalMax(double[][] array, int x, int y) {
-		if (x != 0 && y != 0 && x != array.length - 1 && y != array[0].length - 1) {
-			return array[x][y] > array[x - 1][y] && array[x][y] > array[x + 1][y] && array[x][y] > array[x][y - 1]
-					&& array[x][y] > array[x][y + 1];
-		}
-		return false;
-	}
-
-	public static int[] findLocalMax(double[][] array) {
-		int[] index = { -1, -1 };
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array[0].length; j++) {
-				if (isLocalMax(array, i, j)) {
-					index[0] = i;
-					index[1] = j;
-					return index;
-				}
-			}
-		}
-		return index;
-	}
-
-	public static int[] findLocalmin(double[][] array) {
-		int[] index = { -1, -1 };
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array[0].length; j++) {
-				if (isLocalMin(array, i, j)) {
-					index[0] = i;
-					index[1] = j;
-					return index;
-				}
-			}
-		}
-		return index;
 	}
 
 	/*
@@ -125,7 +191,7 @@ public class ArrayOperator {
 		return index;
 	}
 
-	public static double findArraySum(double[] array) {
+	private static double findArraySum(double[] array) {
 		double sum = 0;
 		for (int i = 0; i < array.length; i++) {
 			sum = sum + Math.abs(array[i]);
