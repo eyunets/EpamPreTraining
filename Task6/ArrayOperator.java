@@ -180,8 +180,8 @@ public class ArrayOperator {
 	public static int findMaxLine(double[][] array) {
 		int index = 0;
 		double tempSum = 0;
-		double maxSum = findArraySum(array[0]);
-		for (int i = 1; i < array.length; i++) {
+		double maxSum = -1;
+		for (int i = 0; i < array.length; i++) {
 			tempSum = findArraySum(array[i]);
 			if (tempSum > maxSum) {
 				maxSum = tempSum;
@@ -194,7 +194,12 @@ public class ArrayOperator {
 	private static double findArraySum(double[] array) {
 		double sum = 0;
 		for (int i = 0; i < array.length; i++) {
-			sum = sum + Math.abs(array[i]);
+			if (array[i] % 2 == 0) {
+				sum = sum + Math.abs(array[i]);
+			}
+			else {
+				return -1;
+			}
 		}
 		return sum;
 	}
