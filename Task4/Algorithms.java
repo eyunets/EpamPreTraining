@@ -1,38 +1,39 @@
 public class Algorithms {
 
-	private final int DIGIT_COUNT = 10;
+	private static final int DIGIT_COUNT = 10;
+	private static final int DIVISOR = 10;
 
-	public int findMaxDigit(int number) {
+	public static int findMaxDigit(int number) {
 		if (number == 0)
 			return 0;
 		return Math.max(number % 10, findMaxDigit(number / 10));
 	}
 
-	public boolean isPalindrome(int number) {
+	public static boolean isPalindrome(int number) {
 		return number == Integer.reverse(number);
 	}
 
-	public boolean isPrime(int number) {
-		for (int i = 2; i < number / 2; i++) {
+	public static boolean isPrime(int number) {
+		int iterationCount = number / 2;
+		for (int i = 2; i < iterationCount; i++) {
 			if (number % i == 0)
 				return false;
 		}
 		return true;
 	}
 
-	public void findPrimeDivisors(int number) {
-		System.out.println("Prime dividers of number " + number + " are: ");
+	public static String findPrimeDIVISORs(int number) {
+		StringBuilder stringBuilder = new StringBuilder("Prime dividers of number " + number + " are: ");
 		for (int i = 2; i <= number; i++) {
 			while (number % i == 0) {
 				number = number / i;
-				System.out.print(i + " ");
+				stringBuilder.append(i + " ");
 			}
-
 		}
-		System.out.println();
+		return stringBuilder.toString();
 	}
 
-	public int findGCD(int number1, int number2) {
+	public static int findGCD(int number1, int number2) {
 		if (number2 == 0) {
 			return Math.abs(number1);
 		}
@@ -40,28 +41,26 @@ public class Algorithms {
 
 	}
 
-	public int findLCM(int number1, int number2) {
+	public static int findLCM(int number1, int number2) {
 		return number1 * number2 / findGCD(number1, number2);
 	}
 
-	public int numDifrentElem(int number) {
+	public static int numDifrentElem(int number) {
 		int tempNumber;
 		int tempValue;
 		int count = 0;
-		int divisor = 10;
 
 		for (int i = 0; i < DIGIT_COUNT; i++) {
 			tempNumber = number;
 			while (tempNumber != 0) {
-				tempValue = tempNumber % divisor;
-				tempNumber /= divisor;
+				tempValue = tempNumber % DIVISOR;
+				tempNumber /= DIVISOR;
 				if (i == tempValue) {
 					count++;
 					break;
 				}
 			}
 		}
-
 		return count;
 	}
 }
