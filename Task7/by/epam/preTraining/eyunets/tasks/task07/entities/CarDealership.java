@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class CarDealership {
 	private Adress adress;
-	private Vehicle[] vehicles;
+	private Car[] cars;
 
 	public CarDealership(Adress adress) {
 		super();
@@ -19,12 +19,12 @@ public class CarDealership {
 		this.adress = adress;
 	}
 
-	public Vehicle[] getVehicles() {
-		return vehicles;
+	public Car[] getCars() {
+		return cars;
 	}
 
-	public void setVehicles(Vehicle[] vehicles) {
-		this.vehicles = vehicles;
+	public void setCars(Car[] cars) {
+		this.cars = cars;
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class CarDealership {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adress == null) ? 0 : adress.hashCode());
-		result = prime * result + Arrays.hashCode(vehicles);
+		result = prime * result + Arrays.hashCode(cars);
 		return result;
 	}
 
@@ -50,13 +50,13 @@ public class CarDealership {
 				return false;
 		} else if (!adress.equals(other.adress))
 			return false;
-		if (!Arrays.equals(vehicles, other.vehicles))
+		if (!Arrays.equals(cars, other.cars))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CarDealership [adress=" + adress + ", vehicles=" + Arrays.toString(vehicles) + "]";
+		return "CarDealership [adress=" + adress + ", cars=" + Arrays.toString(cars) + "]";
 	}
 }
