@@ -3,7 +3,7 @@ package by.epam.preTraining.eyunets.tasks.task07.utils.impl;
 import java.util.Arrays;
 
 import by.epam.preTraining.eyunets.tasks.task07.entities.CarDealership;
-import by.epam.preTraining.eyunets.tasks.task07.entities.Vehicle;
+import by.epam.preTraining.eyunets.tasks.task07.entities.Car;
 import by.epam.preTraining.eyunets.tasks.task07.entities.enums.CarDoorType;
 import by.epam.preTraining.eyunets.tasks.task07.entities.enums.CarModelType;
 import by.epam.preTraining.eyunets.tasks.task07.utils.CarDealershipWorker;
@@ -18,23 +18,23 @@ public class CarDealershipWorkerImpl implements CarDealershipWorker {
 	}
 
 	@Override
-	public void add(Vehicle vehicle) {
+	public void add(Car car) {
 		if (isEmpty()) {
-			Vehicle[] vehicles = new Vehicle[2];
-			vehicles[0] = vehicle;
-			carDealership.setVehicles(vehicles);
+			Car[] cars = new Car[1];
+			cars[0] = car;
+			carDealership.setCars(cars);
 		} else {
-			int count = carDealership.getVehicles().length;
+			int count = carDealership.getCars().length;
 			if (isFull()) {
-				Vehicle[] vehicles = Arrays.copyOf(carDealership.getVehicles(), (int) (count * 1.5 + 1));
-				vehicles[count] = vehicle;
-				carDealership.setVehicles(vehicles);
+				Car[] cars = Arrays.copyOf(carDealership.getCars(), (int) (count * 1.5 + 1));
+				cars[count] = car;
+				carDealership.setCars(cars);
 			} else {
-				Vehicle[] vehicles = carDealership.getVehicles();
+				Car[] cars = carDealership.getCars();
 				for (int i = 0; i < count; i++) {
-					if (vehicles[i] == null) {
-						vehicles[i] = vehicle;
-						carDealership.setVehicles(vehicles);
+					if (cars[i] == null) {
+						cars[i] = car;
+						carDealership.setCars(cars);
 						break;
 					}
 				}
@@ -45,9 +45,9 @@ public class CarDealershipWorkerImpl implements CarDealershipWorker {
 	}
 
 	@Override
-	public void add(Vehicle... vehicles) {
-		for (int i = 0; i < vehicles.length; i++) {
-			add(vehicles[i]);
+	public void add(Car... cars) {
+		for (int i = 0; i < cars.length; i++) {
+			add(cars[i]);
 		}
 		// TODO Auto-generated method stub
 
@@ -56,9 +56,9 @@ public class CarDealershipWorkerImpl implements CarDealershipWorker {
 	@Override
 	public int getCountOfElements() {
 		int count = 0;
-		Vehicle[] vehicles = carDealership.getVehicles();
-		for (int i = 0; i < vehicles.length; i++) {
-			if (vehicles[i] != null) {
+		Car[] cars = carDealership.getCars();
+		for (int i = 0; i < cars.length; i++) {
+			if (cars[i] != null) {
 				count++;
 			}
 		}
@@ -68,12 +68,12 @@ public class CarDealershipWorkerImpl implements CarDealershipWorker {
 
 	@Override
 	public boolean isEmpty() {
-		Vehicle[] vehicles = carDealership.getVehicles();
-		if (vehicles == null) {
+		Car[] cars = carDealership.getCars();
+		if (cars == null) {
 			return true;
 		}
-		for (int i = 0; i < vehicles.length; i++) {
-			if (vehicles[i] != null) {
+		for (int i = 0; i < cars.length; i++) {
+			if (cars[i] != null) {
 				return false;
 			}
 		}
@@ -82,30 +82,30 @@ public class CarDealershipWorkerImpl implements CarDealershipWorker {
 	}
 
 	@Override
-	public Vehicle[] getAll() {
-		Vehicle[] vehicles = carDealership.getVehicles();
-		if (vehicles == null) {
+	public Car[] getAll() {
+		Car[] cars = carDealership.getCars();
+		if (cars == null) {
 			return null;
 		}
-		int nullPointer = 0;
-		for (int i = 0; i < vehicles.length; i++) {
-			if (vehicles[i] == null) {
+		int nullPointer = cars.length;
+		for (int i = 0; i < cars.length; i++) {
+			if (cars[i] == null) {
 				nullPointer = i;
 				break;
 			}
 		}
-		return Arrays.copyOfRange(vehicles, 0, nullPointer);
+		return Arrays.copyOfRange(cars, 0, nullPointer);
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public Vehicle getByIndex(int index) {
+	public Car getByIndex(int index) {
 		if (isEmpty()) {
 			return null;
 		} else {
-			Vehicle[] vehicles = carDealership.getVehicles();
-			if (vehicles.length >= index)
-				return vehicles[index];
+			Car[] cars = carDealership.getCars();
+			if (cars.length >= index)
+				return cars[index];
 			else
 				return null;
 		}
@@ -113,102 +113,99 @@ public class CarDealershipWorkerImpl implements CarDealershipWorker {
 	}
 
 	@Override
-	public void deleteVehicleByIndex(int index) {
+	public void deleteCarByIndex(int index) {
 		if (isEmpty()) {
 		} else {
-			Vehicle[] vehicles = carDealership.getVehicles();
-			Vehicle[]newVehicles = new Vehicle[vehicles.length-1];
-			if (vehicles.length > index) {
-				for(int i = 0, j = 0; i < vehicles.length;i++) {
-					if (i==index) {
-						i++;
-					}
-					else {
-						newVehicles[j] = vehicles[i];
+			Car[] cars = carDealership.getCars();
+			Car[] newCars = new Car[getCountOfElements() - 1];
+			if (cars.length > index) {
+				for (int i = 0, j = 0; i < getCountOfElements(); i++) {
+					if (i != index) {
+						newCars[j] = cars[i];
 						j++;
 					}
 				}
-				carDealership.setVehicles(newVehicles);
+				carDealership.setCars(newCars);
 			}
 		}
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void deleteAllVehicles() {
-		carDealership.setVehicles(null);
+	public void deleteAllCars() {
+		carDealership.setCars(null);
 	}
 
 	@Override
-	public Vehicle[] findByCarModelType(CarModelType carModelType) {
-		Vehicle[] searchedVehicles = null;
+	public Car[] findByCarModelType(CarModelType carModelType) {
+		Car[] searchedCars = null;
 		if (!isEmpty()) {
 			int count = 0;
-			Vehicle[] vehicles = carDealership.getVehicles();
-			for (int i = 0; i < vehicles.length; i++) {
-				if (vehicles[i] != null && vehicles[i].getCarModelType() == carModelType) {
+			Car[] cars = carDealership.getCars();
+			for (int i = 0; i < cars.length; i++) {
+				if (cars[i] != null && cars[i].getCarModelType() == carModelType) {
 					count++;
 				}
 			}
-			searchedVehicles = new Vehicle[count];
-			for (int i = 0, j = 0; i < vehicles.length; i++) {
-				if (vehicles[i] != null && vehicles[i].getCarModelType() == carModelType) {
-					searchedVehicles[j] = vehicles[i];
+			searchedCars = new Car[count];
+			for (int i = 0, j = 0; i < cars.length; i++) {
+				if (cars[i] != null && cars[i].getCarModelType() == carModelType) {
+					searchedCars[j] = cars[i];
 					j++;
 				}
 			}
 		}
-		return searchedVehicles;
+		return searchedCars;
 	}
 
 	@Override
-	public Vehicle[] findByCarDoorType(CarDoorType carDoorType) {
-		Vehicle[] searchedVehicles = null;
+	public Car[] findByCarDoorType(CarDoorType carDoorType) {
+		Car[] searchedCars = null;
 		if (!isEmpty()) {
 			int count = 0;
-			Vehicle[] vehicles = carDealership.getVehicles();
-			for (int i = 0; i < vehicles.length; i++) {
-				if (vehicles[i] != null && vehicles[i].getCarDoorType() == carDoorType) {
+			Car[] cars = carDealership.getCars();
+			for (int i = 0; i < cars.length; i++) {
+				if (cars[i] != null && cars[i].getCarDoorType() == carDoorType) {
 					count++;
 				}
 			}
-			searchedVehicles = new Vehicle[count];
-			for (int i = 0, j = 0; i < vehicles.length; i++) {
-				if (vehicles[i] != null && vehicles[i].getCarDoorType() == carDoorType) {
-					searchedVehicles[j] = vehicles[i];
+			searchedCars = new Car[count];
+			for (int i = 0, j = 0; i < cars.length; i++) {
+				if (cars[i] != null && cars[i].getCarDoorType() == carDoorType) {
+					searchedCars[j] = cars[i];
 					j++;
 				}
 			}
 		}
-		return searchedVehicles;
+		return searchedCars;
 	}
 
 	@Override
-	public Vehicle[] findByManufactoryYear(int manufactoryYear) {
-		Vehicle[] searchedVehicles = null;
+	public Car[] findByManufactoryYear(int manufactoryYear) {
+		Car[] searchedCars = null;
 		if (!isEmpty()) {
 			int count = 0;
-			Vehicle[] vehicles = carDealership.getVehicles();
-			for (int i = 0; i < vehicles.length; i++) {
-				if (vehicles[i] != null && vehicles[i].getManufactoryYear() == manufactoryYear) {
+			Car[] cars = carDealership.getCars();
+			for (int i = 0; i < cars.length; i++) {
+				if (cars[i] != null && cars[i].getManufactoryYear() == manufactoryYear) {
 					count++;
 				}
 			}
-			searchedVehicles = new Vehicle[count];
-			for (int i = 0, j = 0; i < vehicles.length; i++) {
-				if (vehicles[i] != null && vehicles[i].getManufactoryYear() == manufactoryYear) {
-					searchedVehicles[j] = vehicles[i];
+			searchedCars = new Car[count];
+			for (int i = 0, j = 0; i < cars.length; i++) {
+				if (cars[i] != null && cars[i].getManufactoryYear() == manufactoryYear) {
+					searchedCars[j] = cars[i];
 					j++;
 				}
 			}
 		}
-		return searchedVehicles;
+		return searchedCars;
 	}
 
 	private boolean isFull() {
-		Vehicle[] vehicles = carDealership.getVehicles();
-		for (int i = 0; i < vehicles.length; i++) {
-			if (vehicles[i] == null) {
+		Car[] cars = carDealership.getCars();
+		for (int i = 0; i < cars.length; i++) {
+			if (cars[i] == null) {
 				return false;
 			}
 		}
